@@ -1,0 +1,24 @@
+(Fill out this file with brief answers.)
+
+Name(s) and NetID(s) of group members: Jerry Wang (yhw4)
+
+Time spent on the assignment, in hours: 10
+
+Implementation strategy:
+    (describe how you went about implementing the assignment and how the work was divided between the partners.)
+
+Testing strategy:
+    (how did you perform testing and design test cases to achieve coverage?)
+    I used a combination of glass-box and black-box testing to test my methods with
+    particular attention to edge cases such as collision of transpostion tables,
+    growing the table, and
+
+Known problems:
+    (are there any things that do not work?)
+    To my knowledge, all my methods work
+
+Time spent on the assignment, in hours: 10
+
+Comments on the assignment: I thought the documentation was lacking for
+transposition table and the instructions were unclear. The number of modules
+on this assignment also made it confusing to figure out how they were related
