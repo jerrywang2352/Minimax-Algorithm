@@ -6,12 +6,13 @@ Time spent on the assignment, in hours: 10
 
 Implementation strategy:
     (describe how you went about implementing the assignment and how the work was divided between the partners.)
+    I did this assignment by myself
 
 Testing strategy:
     (how did you perform testing and design test cases to achieve coverage?)
     I used a combination of glass-box and black-box testing to test my methods with
     particular attention to edge cases such as collision of transpostion tables,
-    growing the table, and
+    growing the table, and Pente capture logic
 
 Known problems:
     (are there any things that do not work?)

@@ -174,6 +174,7 @@ public class TranspositionTable<GameState> {
         assert classInv();
     }
 
+    @SuppressWarnings("unchecked")
     /**
      * Effect: Make sure the hash table has at least {@code target} buckets.
      * Returns true if the hash table actually resized.

@@ -19,7 +19,7 @@ public class Pente extends MNKGame {
      * Number of pairs captured by player 1
      * player1Stones >= 0
      */
-    private int player1Pairs;
+    public int player1Pairs;
 
     /**
      * Number of pairs captured by player 2
