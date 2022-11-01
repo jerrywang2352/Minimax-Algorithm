@@ -12,6 +12,14 @@ class PenteTest {
     @Test
     void testConstructor() {
         // TODO 1: write at least 1 test case
+        Pente p1 = new Pente();
+        Pente p2 = new Pente();
+        assertTrue(p1.stateEqual(p2));
+        assertEquals(p1.capturedPairsNo(PlayerRole.FIRST_PLAYER),0);
+        assertEquals(p1.capturedPairsNo(PlayerRole.SECOND_PLAYER),0);
+        assertEquals(p1.countToWin(),5);
+        assertEquals(p1.rowSize(),8);
+        assertEquals(p1.colSize(),8);
     }
 
     @Test
@@ -23,6 +31,31 @@ class PenteTest {
         assertTrue(game1.stateEqual(game2));
 
         // TODO 2: write at least 3 test cases
+        //Test 2: Not Equals
+        Pente game3 = new Pente();
+        assertFalse(game3.stateEqual(game1));
+        assertFalse(game3.stateEqual(game2));
+
+        //Test 3: same board if same spaces are occupied by same players
+        game3.makeMove(new Position(2,2));
+        game3.makeMove(new Position(7,7));
+        game1 = new Pente(game3);
+        assertTrue(game3.stateEqual(game1));
+        assertEquals(game1.capturedPairsNo(PlayerRole.FIRST_PLAYER),0);
+        assertEquals(game1.capturedPairsNo(PlayerRole.SECOND_PLAYER),0);
+
+        //Test 4: Test captured pieces are copied to new game
+        Pente game4 = new Pente();
+        game4.makeMove(new Position(2,2));
+        game4.makeMove(new Position(2,3));
+        game4.makeMove(new Position(7,7));
+        game4.makeMove(new Position(2,4));
+        game4.makeMove(new Position(2,5));
+        Pente game5 = new Pente(game4);
+        assertEquals(game5.capturedPairsNo(PlayerRole.FIRST_PLAYER),1);
+        assertEquals(game5.capturedPairsNo(PlayerRole.SECOND_PLAYER),0);
+
+
     }
 
     @Test
@@ -42,6 +75,17 @@ class PenteTest {
         assertNotEquals(game1.hashCode(), game3.hashCode());
 
         // TODO 3: write at least 3 test cases
+        // Test 3: Same spots occupied but by different players
+        game1.makeMove(new Position(4,5));
+        game1.makeMove(new Position(5,4));
+        game2.makeMove(new Position(5,4));
+        game2.makeMove(new Position(4,5));
+        assertNotEquals(game1.hashCode(), game2.hashCode());
+
+        //Test 4:
+
+        //Test 5:
+
     }
 
     @Test

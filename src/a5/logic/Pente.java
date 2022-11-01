@@ -4,6 +4,8 @@ import a5.util.PlayerRole;
 import a5.util.GameType;
 import a5.util.GameResult;
 
+import java.util.Arrays;
+
 
 /**
  * A Pente game, where players take turns to place stones on board.
@@ -14,24 +16,24 @@ import a5.util.GameResult;
 public class Pente extends MNKGame {
 
     /**
-     * Number of stones captured by player 1
+     * Number of pairs captured by player 1
      * player1Stones >= 0
      */
-    private int player1Stones;
+    private int player1Pairs;
 
     /**
-     * Number of stones captured by player 2
+     * Number of pairs captured by player 2
      * player2Stones >= 0
      */
-    private int player2Stones;
+    private int player2Pairs;
     /**
      * Create an 8-by-8 Pente game.
      */
     public Pente() {
         super(8, 8, 5);
         // TODO 1
-        player1Stones = 0;
-        player2Stones = 0;
+        player1Pairs = 0;
+        player2Pairs = 0;
     }
 
     /**
@@ -40,8 +42,8 @@ public class Pente extends MNKGame {
     public Pente(Pente game) {
         super(game);
         // TODO 2
-        this.player1Stones = game.player1Stones;
-        this.player2Stones = game.player2Stones;
+        this.player1Pairs = game.player1Pairs;
+        this.player2Pairs = game.player2Pairs;
 
     }
 
@@ -52,6 +54,116 @@ public class Pente extends MNKGame {
             return false;
         }
         board().place(p,currentPlayer());
+
+        if(board().onBoard(new Position(p.row()+3, p.col()))){  //down
+            if (board().get(new Position(p.row() + 1, p.col())) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row() + 2, p.col())) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row() + 3, p.col())) == currentPlayer().boardValue()) {
+                board().erase(new Position(p.row() + 1, p.col()));
+                board().erase(new Position(p.row() + 2, p.col()));
+                if(currentPlayer().equals(PlayerRole.FIRST_PLAYER)) {
+                    player1Pairs += 1;
+                } else {
+                    player2Pairs += 1;
+                }
+            }
+        }
+        if(board().onBoard(new Position(p.row()-3, p.col()))) { //up
+            if (board().get(new Position(p.row() - 1, p.col())) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row() - 2, p.col())) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row() - 3, p.col())) == currentPlayer().boardValue()) {
+                board().erase(new Position(p.row() - 1, p.col()));
+                board().erase(new Position(p.row() - 2, p.col()));
+                if(currentPlayer().equals(PlayerRole.FIRST_PLAYER)) {
+                    player1Pairs += 1;
+                } else {
+                    player2Pairs += 1;
+                }
+            }
+        }
+        if(board().onBoard(new Position(p.row(), p.col()-3))) { //left
+            if (board().get(new Position(p.row(), p.col()-1)) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row(), p.col()-2)) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row(), p.col()-3)) == currentPlayer().boardValue()) {
+                board().erase(new Position(p.row(), p.col()-1));
+                board().erase(new Position(p.row(), p.col()-2));
+                if(currentPlayer().equals(PlayerRole.FIRST_PLAYER)) {
+                    player1Pairs += 1;
+                } else {
+                    player2Pairs += 1;
+                }
+            }
+        }
+
+        if(board().onBoard(new Position(p.row(), p.col()+3))) { //right
+            if (board().get(new Position(p.row(), p.col()+1)) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row(), p.col()+2)) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row(), p.col()+3)) == currentPlayer().boardValue()) {
+                board().erase(new Position(p.row(), p.col()+1));
+                board().erase(new Position(p.row(), p.col()+2));
+                if(currentPlayer().equals(PlayerRole.FIRST_PLAYER)) {
+                    player1Pairs += 1;
+                } else {
+                    player2Pairs += 1;
+                }
+            }
+        }
+
+        if(board().onBoard(new Position(p.row()-3, p.col()+3))) {//diag down left
+            if (board().get(new Position(p.row()-1, p.col()+1)) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row()-2, p.col()+2)) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row()-3, p.col()+3)) == currentPlayer().boardValue()) {
+                board().erase(new Position(p.row()-1, p.col()+1));
+                board().erase(new Position(p.row()-2, p.col()+2));
+                if(currentPlayer().equals(PlayerRole.FIRST_PLAYER)) {
+                    player1Pairs += 1;
+                } else {
+                    player2Pairs += 1;
+                }
+            }
+        }
+
+        if(board().onBoard(new Position(p.row()+3, p.col()+3))) {//diag down right
+            if (board().get(new Position(p.row()+1, p.col()+1)) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row()+2, p.col()+2)) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row()+3, p.col()+3)) == currentPlayer().boardValue()) {
+                board().erase(new Position(p.row()+1, p.col()+1));
+                board().erase(new Position(p.row()+2, p.col()+2));
+                if(currentPlayer().equals(PlayerRole.FIRST_PLAYER)) {
+                    player1Pairs += 1;
+                } else {
+                    player2Pairs += 1;
+                }
+            }
+        }
+
+        if(board().onBoard(new Position(p.row()-3, p.col()-3))) {//diag up left
+            if (board().get(new Position(p.row()-1, p.col()-1)) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row()-2, p.col()-2)) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row()-3, p.col()-3)) == currentPlayer().boardValue()) {
+                board().erase(new Position(p.row()-1, p.col()-1));
+                board().erase(new Position(p.row()-2, p.col()-2));
+                if(currentPlayer().equals(PlayerRole.FIRST_PLAYER)) {
+                    player1Pairs += 1;
+                } else {
+                    player2Pairs += 1;
+                }
+            }
+        }
+
+        if(board().onBoard(new Position(p.row()+3, p.col()-3))) { // diag up right
+            if (board().get(new Position(p.row()+1, p.col()-1)) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row()+2, p.col()-2)) == currentPlayer().nextPlayer().boardValue()
+                    && board().get(new Position(p.row()+3, p.col()-3)) == currentPlayer().boardValue()) {
+                board().erase(new Position(p.row()+1, p.col()-1));
+                board().erase(new Position(p.row()+2, p.col()-2));
+                if(currentPlayer().equals(PlayerRole.FIRST_PLAYER)) {
+                    player1Pairs += 1;
+                } else {
+                    player2Pairs += 1;
+                }
+            }
+        }
         changePlayer();
         advanceTurn();
         return true;
@@ -73,16 +185,24 @@ public class Pente extends MNKGame {
     public int capturedPairsNo(PlayerRole playerRole) {
         // TODO 4
         if(playerRole.equals(PlayerRole.FIRST_PLAYER)) {
-            return player1Stones;
+            return player1Pairs;
         } else {
-            return player2Stones;
+            return player2Pairs;
         }
     }
 
     @Override
     public boolean hasEnded() {
         // TODO 5
-        return super.hasEnded();
+        if(player1Pairs >= 5) {
+            setResult(GameResult.FIRST_PLAYER_WON);
+            return true;
+        } else if(player2Pairs >= 5) {
+            setResult(GameResult.SECOND_PLAYER_WON);
+            return true;
+        } else {
+            return super.hasEnded();
+        }
     }
 
     @Override
@@ -113,12 +233,16 @@ public class Pente extends MNKGame {
      */
     protected boolean stateEqual(Pente p) {
         // TODO 6
-        return true;
+        return p.player1Pairs == this.player1Pairs && p.player2Pairs == this.player2Pairs && super.stateEqual(p);
     }
 
     @Override
     public int hashCode() {
         // TODO 7
-        return super.hashCode();
+        return Arrays.hashCode(new int[] {
+                super.hashCode(),
+                player1Pairs,
+                player2Pairs,
+        });
     }
 }
